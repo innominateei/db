@@ -1,0 +1,119 @@
+---conditional structures
+if condition then
+    statement;
+elseif condition then
+    statement;
+else
+    statement;
+end if;
+
+case selector
+when selector_value then statement;
+when selector_value then statement;
+else statement;
+end case;
+
+goto label_2;
+<<label_1>>
+statement;
+goto label_3;
+<<label_2>>
+statement;
+goto label_1
+<<label_3>>
+statement;
+
+---control structures
+loop
+    statement;
+    exit when condition;
+end loop;
+
+for counter in lower_bound...upper_bound
+loop
+    statement;
+end loop;
+
+while condition
+loop
+    statements;
+end loop;
+
+continue;
+
+---select into
+select
+    select_list
+into
+    variable_list
+from
+    table_name
+where
+    condition;
+
+---declaration
+declare
+    variable_name table_name.column_name%TYPE;
+    variable_name table_name%ROWTYPE
+
+---exceptions
+declare
+    exception_name EXCEPTION;
+    PRAGMA exception_init(exception_name, error_number);
+begin
+    begin
+        if condition then
+            RAISE exception_name;
+        end if;
+    end;
+EXCEPTION
+    when exception_name then
+        statement;
+    when exception_name then
+        statement;
+    when OTHERS then
+        dbms_out.put_line(SQLERRM);
+
+---user defined records
+declare type record_type is record(
+    parameter,
+    parameter);
+record_obj record_type;
+
+---cursors
+cursor cursor_name is select_statement;
+open cursor_name;
+loop
+    fetch cursor_name into variable_names;
+    exit when cursor_name%notfound;
+end loop;
+
+---procedure
+create or replace PROCEDURE procedure_name (parameter_name [IN|OUT|IN OUT] datatype)
+is
+    --declaration
+begin
+    --do something
+    exception
+        when OTHERS then
+            dbms_output.put_line(SQLERRM);
+end;
+EXECUTE procedure_name(arguments);
+EXEC procedure_name(arguments);
+
+---function
+create or replace FUCTION function_name (parameter_list) RETURN return_type
+is
+    --declaration
+begin
+    --do someting
+[exception]
+end;
+
+---triggers
+create or replace TRIGGER trigger_name
+{BEFORE|AFTER} triggering_event ON table_name
+[FOR EACH ROW]
+[FOLLOWS|PRECEDES another_trigger]
+[ENABLE|DISABLE]
+[WHEN condition]
